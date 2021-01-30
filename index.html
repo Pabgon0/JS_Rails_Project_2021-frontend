@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Tracker</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+</head>
+<body class="">
+    <div class="bg-purple-700">
+      <navbar class="container mx-auto grid grid-cols-2 py-6">
+        <span class="text-white text-2xl font-bold">Recipe Ingredient Tracker</span>
+        <div id="auth" class="text-right"></div>
+      </navbar>
+    </div>
+    <div class="container mx-auto sm:grid grid-cols-3 gap-4 my-4">
+        <section id="flash" class="h-10 col-span-3 py-2 pl-4 opacity-0 transition-opacity duration-700"></section>
+        <section id="recipesContainer" class="px-4 bg-gray-400 sm:min-h-screen rounded-md shadow">
+          <h1 class="text-2xl semibold border-b-4 border-blue">Recipes</h1>
+          <form id="newRecipe" class="flex mt-4">
+            <input type="text" name="name" class="flex-1 p-3" placeholder="New Recipe" />
+            <button type="submit" class="flex-none"><i class="fa fa-plus p-4 z--1 bg-purple-400"></i></button>
+          </form>
+          <ul id="recipes" class="list-none">
+
+          </ul>
+        </section>
+        <section id="ingedientsContainer" class="px-4 bg-gray-400 sm:min-h-screen col-span-2 rounded-md shadow">
+          <h1 class="text-2xl semibold border-b-4 border-blue">Ingredients</h1>
+          <form id="newIngredientForm" class="flex mt-4">
+            <input type="text" class="block flex-1 p-3" name="name" placeholder="New Ingredient" />
+            <button type="submit" class="block flex-none"><i class="fa fa-plus p-4 z--1 bg-purple-400"></i></button>
+          </form>
+          <ul id="ingredients" class="list-none">
+            <li class="my-2 p-4">Pick a recipe to see the ingredients to make it.</li>
+          </ul>
+        </section>
+    </div>
+
+    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+      <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+      
+      <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        
+        <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+          <svg class="modal-close fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+          </svg>
+          <span class="modal-close text-sm">(Esc)</span>
+        </div>
+
+        <div class="modal-content py-4 text-left px-6">
+          <div class="flex justify-between items-center pb-3">
+            <p id="modal-title" class="text-2xl font-bold"></p> 
+            <div class="modal-close p-2 cursor-pointer z-50">
+              <svg class="modal-close fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+              </svg>
+            </div>
+          </div>
+  
+          <div id="modal-content">
+            <form class="authForm bg-white rounded px-8 pt-0 pb-2 mb-4">
+              <h1 class="text-2xl font-bold mb-4">Login</h1>
+              <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                  Email
+                </label>
+                <input 
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                  id="email" 
+                  type="eamil" 
+                  name="email" 
+                  placeholder="email"
+                >
+              </div>
+              <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                  Password
+                </label>
+                <input 
+                  class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+                  id="password" 
+                  type="password" 
+                  name="password" 
+                  placeholder="******************"
+                >
+                <p class="text-red-500 text-xs italic">Choose a password.</p>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <input 
+                  class="multi-submit bg-blue-500 hover:bg-blue-700 transition duration-200 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline" 
+                  type="submit"
+                  value="Login"
+                />
+                <input 
+                  class="multi-submit bg-purple-500 hover:bg-purple-700 transition duration-200 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline" 
+                  type="submit"
+                  value="Signup"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/utilities.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/models.js"></script>
+    <script src="js/listeners.js"></script>
+</body>
+</html>
