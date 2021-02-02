@@ -127,7 +127,6 @@ class Recipe {
       if(!Ingredient.active_recipe_id) {
         return Promise.reject().catch(() => new FlashMessage({type: 'error', message: "Please pick a recipe before adding ingredients."}));
       } else {
-        console.log(formData)
         formData.recipe_id = Ingredient.active_recipe_id;
       }
       return Auth.fetch('http://localhost:3000/ingredients',{
