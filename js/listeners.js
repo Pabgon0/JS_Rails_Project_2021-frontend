@@ -81,12 +81,18 @@ document.addEventListener('keydown', (e) => {
   })
 
   document.addEventListener('keyup', function(e) {
+    //first i captured the key press and set it to the attribute target
     let target = e.target;
-
+    //I than made a if statement that verifys the id location on the html
     if (target.matches('#searchRecipe')) {
+      //I set the value of the keypress to the attribute val
       let val = target.value
+      //I mapped the existing recipe collection the user has and iterate over each one
       Recipe.collection.map( recipe => {
+        //Another if statement checks to see if the val includes the current search
         if (recipe.name.includes(val)) {
+          //if it does, it calls the show method for recipe and highlights the recipe
+          //closest to the user input.
           recipe.show();
         }
       })
