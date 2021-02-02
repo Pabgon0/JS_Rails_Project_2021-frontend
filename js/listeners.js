@@ -79,3 +79,16 @@ document.addEventListener('keydown', (e) => {
        Modal.toggle();
     }
   })
+
+  document.addEventListener('keyup', function(e) {
+    let target = e.target;
+
+    if (target.matches('#searchRecipe')) {
+      let val = target.value
+      Recipe.collection.map( recipe => {
+        if (recipe.name.includes(val)) {
+          recipe.show();
+        }
+      })
+    }
+  })

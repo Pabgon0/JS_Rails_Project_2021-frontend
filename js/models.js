@@ -9,7 +9,6 @@ class Recipe {
     }
 
     static all() {
-      console.log(this);
       return Auth.fetch("http://localhost:3000/recipes")
         .then(recipeArray => {
           this.collection = recipeArray.map(attrs => new Recipe(attrs))
@@ -49,6 +48,7 @@ class Recipe {
           return res.text().then(error => Promise.reject(err))
         })
     }
+
 
     markActive() {
       if(Recipe.activeList) {
@@ -127,6 +127,7 @@ class Recipe {
       if(!Ingredient.active_recipe_id) {
         return Promise.reject().catch(() => new FlashMessage({type: 'error', message: "Please pick a recipe before adding ingredients."}));
       } else {
+        console.log(formData)
         formData.recipe_id = Ingredient.active_recipe_id;
       }
       return Auth.fetch('http://localhost:3000/ingredients',{
