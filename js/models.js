@@ -49,6 +49,14 @@ class Recipe {
         })
     }
 
+    //The unhide() method sets the style of the recipe element to show itself
+    unhide() {
+      this.element.style.display = "";
+    }
+    //The hide() method sets the style of the recipe element to hide itself
+    hide() {
+      this.element.style.display = "none";
+    }
 
     markActive() {
       if(Recipe.activeList) {
